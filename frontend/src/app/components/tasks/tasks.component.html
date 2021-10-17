@@ -1,0 +1,4 @@
+<div *ngFor="let taskItem of tasks">
+    <!-- Use property binding to pass data to task instance-->
+    <app-task [task]="taskItem" ></app-task>
+</div>
