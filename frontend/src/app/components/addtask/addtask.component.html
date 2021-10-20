@@ -1,0 +1,56 @@
+<div class="container">
+  <form [formGroup]="taskForm">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control" formControlName="title" />
+      <!-- ? symbol makes the required property optional -->
+      <div
+        class="form-text"
+        *ngIf="titleFormControl.touched && titleFormControl.errors?.required"
+      >
+        Title is a required field.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea
+        type="text"
+        class="form-control"
+        formControlName="description"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <input type="text" class="form-control" formControlName="category" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Task Date</label>
+      <input type="datetime" class="form-control" formControlName="task_date" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Priority Level</label>
+      <select class="form-select" formControlName="priority_level">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Progress Level</label>
+      <select class="form-select" formControlName="progress_level">
+        <option value="pending">Pending</option>
+        <option value="started">Started</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="onSubmit()"
+      [disabled]="taskForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
