@@ -16,4 +16,8 @@ export class TasksService {
     return this.http.get<Task[]>('http://localhost:3000'); 
   }
 
+  deleteTask(task: any): Observable<Task> {
+    return this.http.delete<Task>(`http://localhost:3000/${task.id}`);
+  }
+
 }

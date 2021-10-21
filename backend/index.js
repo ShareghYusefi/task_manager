@@ -14,6 +14,20 @@ app.get('/', (req, res) => {
     });
 })
 
+app.delete('/:id', (req, res)=>{
+    Task.findByPk(req.params.id).then((task) => {
+        if(task){
+            task.destroy().then((result) => {
+                return res.status(200).send(result);
+            });
+        } else {
+            return res.status(404).send("Could not find task in DB");
+        }
+    }).catch((error) => {
+        return res.status(500).send(error);
+    });
+})
+
 app.listen(3000, () => {
     console.log('Server is on port 3000...');
 });

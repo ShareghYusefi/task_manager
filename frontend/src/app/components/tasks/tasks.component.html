@@ -1,4 +1,5 @@
 <div *ngFor="let taskItem of tasks">
     <!-- Use property binding to pass data to task instance-->
-    <app-task [task]="taskItem" ></app-task>
+    <!-- Listen for deleteEvent event & call deleteTask event on parent :: $event stores passed event data -->
+    <app-task [task]="taskItem" (deleteEvent)="deleteTask($event)" ></app-task>
 </div>

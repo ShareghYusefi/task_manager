@@ -35,4 +35,18 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  deleteTask(task: any): void {
+    console.log(task);
+    // Delete task
+    this.service.deleteTask(task).subscribe(
+      // success callback  
+      (results)=>{
+        console.log(results);
+      },
+      // failure callback
+      (error) => {
+        console.log(error);
+      });
+  }
+
 }
