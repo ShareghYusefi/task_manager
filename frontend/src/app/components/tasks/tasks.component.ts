@@ -36,7 +36,6 @@ export class TasksComponent implements OnInit {
   }
 
   deleteTask(task: any): void {
-    console.log(task);
     // Delete task
     this.service.deleteTask(task).subscribe(
       // success callback  
