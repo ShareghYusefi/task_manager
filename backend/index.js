@@ -9,6 +9,10 @@ app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
+app.get('/home', (req, res) => {
+    res.send('Hello World');
+})
+
 app.get('/', (req, res) => {
     Task.findAll().then((result) => {
         res.status(200).send(result);
@@ -40,6 +44,6 @@ app.delete('/:id', (req, res)=>{
     });
 })
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Server is on port 3000...');
 });
