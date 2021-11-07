@@ -1,3 +1,6 @@
+// The required function returns a function, so we call and give it an argument: The argument is the arbitrary namespace defince for debugging
+const startupDebugger = require('debug')('app:startup');
+const dbDebugger = require('debug')('app:db');
 // Import environment config object
 const config = require('config');
 
@@ -11,14 +14,20 @@ app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
-// Test different configurations
-console.log('Application Name: ' + config.get('name'));
-console.log('Mail Server: ' + config.get('mail.host'));
-// Stored environment variable can be mapped to custom envrionment variables define by config package for referening through the config object
-// console.log('Mail Password: ' + config.get('mail.password'));
+if(app.get('env') === 'development'){
+    // Test different configurations
+    startupDebugger('Config Testing enabled');
+
+    console.log('Application Name: ' + config.get('name'));
+    console.log('Mail Server: ' + config.get('mail.host'));
+    // Stored environment variable can be mapped to custom envrionment variables define by config package for referening through the config object
+    // console.log('Mail Password: ' + config.get('mail.password'));
+}
+
 
 
 app.get('/home', (req, res) => {
+    dbDebugger('Connected to the database');
     res.send('Hello World');
 })
 
@@ -52,7 +61,8 @@ app.delete('/:id', (req, res)=>{
         return res.status(500).send(error);
     });
 })
+
 // global process object has property variable env 
 app.listen(process.env.PORT || 3000, () => {
     console.log('Server is on port 3000...');
-});
+},);
